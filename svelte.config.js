@@ -7,15 +7,21 @@ const dev = process.env.NODE_ENV === 'development';
 const config = {
   preprocess: vitePreprocess(),
   kit: {
-    adapter: adapter(),
+    adapter: adapter({
+      fallback: 'index.html'
+    }),
     paths: {
-      base: dev ? '' : '/snow_wolf', // Adjust the base path for GitHub Pages or similar deployments
+      base: dev ? '' : '/snow_wolf',
     },
     appDir: 'app',
     prerender: {
       default: true,
     },
   },
+  // Force output directory to be 'build'
+  output: {
+    dir: 'build',
+  }
 };
 
 export default config;
